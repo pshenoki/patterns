@@ -41,4 +41,3 @@ if __name__ == '__main__':
     multi_pulti_box = Box()
     multi_pulti_box.add_item([multi_box, box])
     print(multi_pulti_box.get_full_price())
-

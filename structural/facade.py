@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class Checker(ABC):
-
     @staticmethod
     @abstractmethod
     def milk_price_check():

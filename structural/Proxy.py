@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from time import time, sleep
 
-WEATHER_SITE = {'Moscow': 20}
-
 
 class WeatherChecker(ABC):
     @abstractmethod
@@ -39,6 +37,7 @@ class ProxyMoscowWeatherChecker(WeatherChecker):
 
 
 if __name__ == '__main__':
+    WEATHER_SITE = {'Moscow': 20}
     moscow_weather = MoscowWeatherChecker(WEATHER_SITE)
     proxy_moscow = ProxyMoscowWeatherChecker(moscow_weather, seconds_passed=2)
 

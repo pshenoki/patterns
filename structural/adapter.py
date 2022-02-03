@@ -25,4 +25,3 @@ if __name__ == '__main__':
     russian_a1 = RussianLearningEng('Артем')
     print(russian.tell_the_name())
     print(russian_a1.tell_the_name())
-
