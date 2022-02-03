@@ -2,7 +2,7 @@ class House:
     def __init__(self, maket):
         self.maket = maket
 
-    def look(self):
+    def view(self):
         for level_name, level in self.maket.items():
             print(level_name + ':' + level)
 
@@ -82,15 +82,15 @@ if __name__ == '__main__':
     maket_2 = {'level_1': '', 'level_3': '', 'level_4': ''}
 
     cube_house = Director.create_building(CubeHouseBuilder, maket_1)
-    cube_house.look()
+    cube_house.view()
     print('')
 
     cube_house = Director.create_building(CubeHouseBuilder, maket_2)
-    cube_house.look()
+    cube_house.view()
     print('')
 
     mushroom_house = Director.create_building(MushroomHouseBuilder, maket_1)
-    mushroom_house.look()
+    mushroom_house.view()
 
 
 
