@@ -57,10 +57,11 @@ class ShopFacade:
         return min_price
 
 
-p = PerekrestokChecker()
-v = VkusvillChecker()
-m = MarketChecker()
+if __name__ == '__main__':
+    p = PerekrestokChecker()
+    v = VkusvillChecker()
+    m = MarketChecker()
 
-grandma = ShopFacade(p, v, m, 23)
-print(grandma.check_milk_min())
-print(grandma.check_bread_min())
+    grandma = ShopFacade(p, v, m, 23)
+    print(grandma.check_milk_min())
+    print(grandma.check_bread_min())

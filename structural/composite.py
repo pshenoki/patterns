@@ -26,18 +26,19 @@ class Box(Component):
         return price
 
 
-com1 = Component('pen', 11)
-com2 = Component('pencil', 12)
-box = Box()
-box.add_item([com1, com2])
-print(box.get_full_price())
-print('------------------------------')
-com3 = Component('rubber', 13)
-multi_box = Box()
-multi_box.add_item([box, com3])
-print(multi_box.get_full_price())
-print('------------------------------')
-multi_pulti_box = Box()
-multi_pulti_box.add_item([multi_box, box])
-print(multi_pulti_box.get_full_price())
+if __name__ == '__main__':
+    com1 = Component('pen', 11)
+    com2 = Component('pencil', 12)
+    box = Box()
+    box.add_item([com1, com2])
+    print(box.get_full_price())
+    print('------------------------------')
+    com3 = Component('rubber', 13)
+    multi_box = Box()
+    multi_box.add_item([box, com3])
+    print(multi_box.get_full_price())
+    print('------------------------------')
+    multi_pulti_box = Box()
+    multi_pulti_box.add_item([multi_box, box])
+    print(multi_pulti_box.get_full_price())
 

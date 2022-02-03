@@ -44,21 +44,22 @@ class SlashDecor(AbsDecor):
         return wrap
 
 
-printer_hello = PrintMachine('hello')
-print(printer_hello.make_word())
+if __name__ == '__main__':
+    printer_hello = PrintMachine('hello')
+    print(printer_hello.make_word())
 
-dec_printer = StarDecor(printer_hello)
-print(dec_printer.make_word())
+    dec_printer = StarDecor(printer_hello)
+    print(dec_printer.make_word())
 
-dec_slash_printer = SlashDecor(dec_printer)
-print(dec_slash_printer.make_word())
-
-
-@SlashDecor()
-class PrintMachineMod(PrintMachine):
-    pass
+    dec_slash_printer = SlashDecor(dec_printer)
+    print(dec_slash_printer.make_word())
 
 
-mod_printer = PrintMachineMod('name')
-print(mod_printer.make_word)
+    @SlashDecor()
+    class PrintMachineMod(PrintMachine):
+        pass
+
+
+    mod_printer = PrintMachineMod('name')
+    print(mod_printer.make_word)
 
