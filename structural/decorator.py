@@ -26,6 +26,9 @@ class AbsDecor(Machine, ABC):
 
 class StarDecor(AbsDecor):
 
+    def __call__(self, *args, **kwargs):
+        return self.make_word()
+
     def make_word(self):
         return '* ' + self.machine.make_word() + ' *'
 
@@ -34,6 +37,11 @@ class SlashDecor(AbsDecor):
 
     def make_word(self):
         return '/ ' + self.machine.make_word() + ' /'
+
+
+@StarDecor
+class PrintMachine2(PrintMachine):
+    pass
 
 
 if __name__ == '__main__':
@@ -46,3 +54,5 @@ if __name__ == '__main__':
     dec_slash_printer = SlashDecor(dec_printer)
     print(dec_slash_printer.make_word())
 
+    printer_2 = PrintMachine2('aaa')
+    print(printer_2.make_word())
