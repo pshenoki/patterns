@@ -73,7 +73,7 @@ if __name__ == '__main__':
     commander = CommandsInvoker()
     person = Person()
     person.show()
-    ''' Добавляем все команды в список команды'''
+    ''' Добавляем все команды в список команд'''
     commander.store_command(PutOnHat(person))
     commander.store_command(PutOnCloak(person))
     ''' Выполняем только execute команды'''
