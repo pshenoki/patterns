@@ -26,8 +26,11 @@ class Client(ABC):
     def call(self, shop):
         pass
 
-    def subscription(self, shop):
+    def subscribe(self, shop):
         shop.attach(self)
+
+    def unsubscribe(self, shop):
+        shop.detach(self)
 
 
 class MtsShop(Shop):
@@ -73,8 +76,8 @@ if __name__ == '__main__':
     ipad_client = IPadChecker("Петя")
 
     # Подключаемся на подписку к магазину
-    iphone_client.subscription(mts_shop)
-    ipad_client.subscription(mts_shop)
+    iphone_client.subscribe(mts_shop)
+    ipad_client.subscribe(mts_shop)
     print('-' * 20)
 
     # Добавляем товар, на который никто не подписан, включаем оповещение
@@ -89,4 +92,9 @@ if __name__ == '__main__':
 
     # Добавляем товар ipad, включаем оповещение
     mts_shop.update_menu('ipad')
+    mts_shop.notify()
+    print('-' * 20)
+
+    # Отменяем подписку Васи на магазин
+    iphone_client.unsubscribe(mts_shop)
     mts_shop.notify()
