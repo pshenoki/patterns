@@ -1,15 +1,26 @@
+""" Задача:
+        1. Создать класс машин (Ауди и Лексус) c возможностью принимать инженера.
+        2. Создать инженера, который в машины устанавливает детали согдасно их маркам.
+    Паттерн:
+        Посетитель (visitor) """
+
 from abc import ABC, abstractmethod
 
 
 class Car(ABC):
+    """ абстрактный класс для всех машин """
+    def __init__(self):
+        self.car_body = []
+
+    def add_component(self, component):
+        self.car_body.append(component)
+
     @abstractmethod
     def accept(self, visitor):
         pass
 
 
 class Lexus(Car):
-    def __init__(self):
-        self.car_body = []
 
     def show_car(self):
         print(f'Lexus: {self.car_body}')
@@ -19,8 +30,6 @@ class Lexus(Car):
 
 
 class Audi(Car):
-    def __init__(self):
-        self.car_body = []
 
     def show_car(self):
         print(f'Audi: {self.car_body}')
@@ -30,6 +39,7 @@ class Audi(Car):
 
 
 class Engineer(ABC):
+    """ абстрактный класс для всех инженеров """
     @abstractmethod
     def visit_audi_car(self, audi_car):
         pass
@@ -40,57 +50,64 @@ class Engineer(ABC):
 
 
 class WheelEngineer(Engineer):
+    """ Инженер, который устанавливает колеса """
     def visit_audi_car(self, audi_car):
-        audi_car.car_body.append('audi_wheels')
+        audi_car.add_component('audi_wheels')
 
     def visit_lexus_car(self, lexus_car):
-        lexus_car.car_body.append('lexus_wheels')
+        lexus_car.add_component('lexus_wheels')
 
 
 class EngineEngineer(Engineer):
+    """ Инженер, который устанавливает двигатель """
     def visit_audi_car(self, audi_car):
-        audi_car.car_body.append('audi_engine')
+        audi_car.add_component('audi_engine')
 
     def visit_lexus_car(self, lexus_car):
-        lexus_car.car_body.append('lexus_engine')
+        lexus_car.add_component('lexus_engine')
 
 
 class UniversalEngineer(Engineer):
+    """ Универсальный инженер, который устанавливает, что попросят """
     def __init__(self, component):
         self.component = component
 
     def visit_audi_car(self, audi_car):
-        audi_car.car_body.append(f'audi_{self.component}')
+        audi_car.add_component(f'audi_{self.component}')
 
     def visit_lexus_car(self, lexus_car):
-        lexus_car.car_body.append(f'lexus_{self.component}')
+        lexus_car.add_component(f'lexus_{self.component}')
 
 
 if __name__ == '__main__':
-    """ создаем инженеров"""
+
+    # Создаем инженеров (универсальный инженер будет устанавливать колеса)
     wheel_engineer = WheelEngineer()
     engine_engineer = EngineEngineer()
     universal_engineer = UniversalEngineer('doors')
 
-    """ создаем машины и смотрим внутренности"""
+    # Создаем машины и смотрим внутренности
     car_audi = Audi()
     car_lexus = Lexus()
     car_audi.show_car()
     car_lexus.show_car()
-    print('-----------------------------')
-    """ приглашаем инженера по колесам"""
+    print('-' * 20)
+
+    # Приглашаем инженера по колесам
     car_audi.accept(wheel_engineer)
     car_lexus.accept(wheel_engineer)
     car_audi.show_car()
     car_lexus.show_car()
-    print('-----------------------------')
-    """ приглашаем инженера по двигателям"""
+    print('-' * 20)
+
+    # Приглашаем инженера по двигателям
     car_audi.accept(engine_engineer)
     car_lexus.accept(engine_engineer)
     car_audi.show_car()
     car_lexus.show_car()
-    print('-----------------------------')
-    """ приглашаем инженера универсального"""
+    print('-' * 20)
+
+    # Приглашаем универсального инженера для установки дверей
     car_audi.accept(universal_engineer)
     car_lexus.accept(universal_engineer)
     car_audi.show_car()
