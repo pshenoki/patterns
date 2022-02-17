@@ -95,6 +95,6 @@ if __name__ == '__main__':
     mts_shop.notify()
     print('-' * 20)
 
-    # Отменяем подписку Васи на магазин
+    # Отменяем подписку Васи на магазин, включаем оповещение
     iphone_client.unsubscribe(mts_shop)
     mts_shop.notify()
