@@ -81,14 +81,14 @@ class Factory2000(AbsFactory):
 
 if __name__ == '__main__':
 
-    # Создадим с помощь абстрактной фабрики фабрику 2000 года и выпустим на ней технику
+    # Создадим с помощью абстрактной фабрики фабрику 2000 года и выпустим на ней технику
     factory1 = AbsFactory.create_factory(2000)
     my_auto1 = factory1.create_auto()
     my_plan1 = factory1.create_plan()
     print(my_auto1.run())
     print(my_plan1.run())
 
-    # Создадим с помощь абстрактной фабрики фабрику 1990 года и выпустим на ней технику
+    # Создадим с помощью абстрактной фабрики фабрику 1990 года и выпустим на ней технику
     factory2 = AbsFactory.create_factory(1990)
     my_auto2 = factory2.create_auto()
     my_plan2 = factory2.create_plan()
