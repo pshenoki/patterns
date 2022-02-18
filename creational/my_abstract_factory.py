@@ -1,3 +1,12 @@
+""" Паттерн:
+        Абстрактная фабрика (Abstract factory)
+    Суть паттерна:
+        Паттерн "Фабричный метод" позволяет создавать семейства связанных объектов,
+        не привязываясь к конкретным классам создаваемых объектов..
+    Задача:
+        1. Создать класс Абстрактная Фабрика, который бы создавал фабрики определенного года.
+        2. Создать класс Фабрика, который бы создавал модели определенного года."""
+
 from abc import abstractmethod, ABC
 
 
@@ -20,29 +29,28 @@ class Auto1990(Transport):
         return 'auto 1990 run'
 
 
-class Plane1999(Transport):
+class Plane2000(Transport):
 
     def run(self):
-        return 'plane 1999 run'
+        return 'plane 2000 run'
 
 
-class Auto1999(Transport):
+class Auto2000(Transport):
 
     def run(self):
-        return 'auto 1999 run'
+        return 'auto 2000 run'
 
 
 class AbsFactory(ABC):
-
+    """ Абстрактная фабрика будет создавать фабрики по производству в зависимости от года """
     @staticmethod
     def create_factory(model):
 
-        MODELS = {
+        models = {
             1990: Factory1990(),
-            1999: Factory1999()
-
+            2000: Factory2000()
         }
-        return MODELS[model]
+        return models[model]
 
     @abstractmethod
     def create_auto(self):
@@ -62,26 +70,27 @@ class Factory1990(AbsFactory):
         return Plane1990()
 
 
-class Factory1999(AbsFactory):
+class Factory2000(AbsFactory):
 
     def create_auto(self):
-        return Auto1999()
+        return Auto2000()
 
     def create_plan(self):
-        return Plane1999()
+        return Plane2000()
 
 
 if __name__ == '__main__':
-    factory = AbsFactory.create_factory(1999)
-    my_auto = factory.create_auto()
-    my_plan = factory.create_plan()
 
-    print(my_auto.run())
-    print(my_plan.run())
+    # Создадим с помощь абстрактной фабрики фабрику 2000 года и выпустим на ней технику
+    factory1 = AbsFactory.create_factory(2000)
+    my_auto1 = factory1.create_auto()
+    my_plan1 = factory1.create_plan()
+    print(my_auto1.run())
+    print(my_plan1.run())
 
-    factory = AbsFactory.create_factory(1990)
-    my_auto = factory.create_auto()
-    my_plan = factory.create_plan()
-
-    print(my_auto.run())
-    print(my_plan.run())
+    # Создадим с помощь абстрактной фабрики фабрику 2000 года и выпустим на ней технику
+    factory2 = AbsFactory.create_factory(1990)
+    my_auto2 = factory2.create_auto()
+    my_plan2 = factory2.create_plan()
+    print(my_auto2.run())
+    print(my_plan2.run())
