@@ -1,3 +1,13 @@
+""" Суть паттерна:
+        Паттерн одиночка гарантирует, что у класса будет только один экземпляр,
+        и предоставляет к нему глобальную точку доступа.
+    Задача:
+        1. Создать класс, у которого может быть только один экземпляр.
+        2. Создать еще один экземпляр этого класса и проверить, что это один и тот же объект.
+    Паттерн:
+        Одиночка (Singleton)"""
+
+
 class Singleton(type):
 
     def __init__(cls, name, bases, attrs, **kwargs):
@@ -10,12 +20,13 @@ class Singleton(type):
         return cls.__instance
 
 
-class MySqlConnection(metaclass=Singleton):
+class RussianPresident(metaclass=Singleton):
     pass
 
 
 if __name__ == '__main__':
-    sql_connection_1 = MySqlConnection()
-    sql_connection_2 = MySqlConnection()
-
-    print(sql_connection_1 is sql_connection_2)
+    # Создаем президента и пытаемся создать еще одного
+    putin = RussianPresident()
+    medvedev = RussianPresident()
+    # Проверяем...
+    print(medvedev is putin)
