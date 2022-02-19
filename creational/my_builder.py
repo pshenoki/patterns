@@ -1,3 +1,14 @@
+""" Паттерн:
+        Строитель (Builder)
+    Суть паттерна:
+        Паттерн "Строитель" позволяет создавать сложные объекты пошагово.
+        Строитель даёт возможность использовать один и тот же код строительства
+        для получения разных представлений объектов.
+    Задача:
+        1. Создать класс Дом, который бы имел план строительства.
+        2. Создать класс Строитель, который бы строил дом по макету, но в своем стиле. """
+
+
 class House:
     def __init__(self, maket):
         self.maket = maket
@@ -8,9 +19,10 @@ class House:
 
 
 class CubeHouseBuilder:
+    """ Строитель в кубическом стиле """
     def __init__(self, maket):
         self.maket = maket
-        self.plan = House(maket)
+        self.house = House(maket)
 
     def make_level_1(self):
         if 'level_1' in self.maket:
@@ -33,13 +45,14 @@ class CubeHouseBuilder:
         return self
 
     def create(self):
-        return self.plan
+        return self.house
 
 
 class MushroomHouseBuilder:
+    """ Строитель в грибном стиле """
     def __init__(self, maket):
         self.maket = maket
-        self.plan = House(maket)
+        self.house = House(maket)
 
     def make_level_1(self):
         if 'level_1' in self.maket:
@@ -62,11 +75,12 @@ class MushroomHouseBuilder:
         return self
 
     def create(self):
-        return self.plan
+        return self.house
 
 
 class Director:
-
+    """ Класс директор, который принимает макет дома и строителя и строит обьект
+        (не имеет особо отношения к паттерну, создан для красоты)"""
     @staticmethod
     def create_building(builder, maket):
         return builder(maket)\
@@ -78,19 +92,22 @@ class Director:
 
 
 if __name__ == '__main__':
+    # Пусть есть два макета дома
     maket_1 = {'level_1': '', 'level_2': '', 'level_3': '', 'level_4': ''}
     maket_2 = {'level_1': '', 'level_3': '', 'level_4': ''}
 
+    # Построим дом по чертежу №1 с помощью кубического строителя и грибного.
     cube_house = Director.create_building(CubeHouseBuilder, maket_1)
     cube_house.view()
-    print('')
-
-    cube_house = Director.create_building(CubeHouseBuilder, maket_2)
-    cube_house.view()
-    print('')
-
+    print('.' * 40)
     mushroom_house = Director.create_building(MushroomHouseBuilder, maket_1)
     mushroom_house.view()
+    print('.' * 40)
 
-
+    # Построим дом по чертежу №2 с помощью кубического строителя и грибного.
+    cube_house = Director.create_building(CubeHouseBuilder, maket_2)
+    cube_house.view()
+    print('.' * 40)
+    mushroom_house = Director.create_building(MushroomHouseBuilder, maket_2)
+    mushroom_house.view()
 
